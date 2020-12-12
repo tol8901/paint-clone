@@ -13,7 +13,9 @@ const downloadBtn = document.getElementById('download');
 const { body } = document;
 
 // Global Variables
-
+const canvas = document.createElement('canvas');
+canvas.id = 'canvas';
+const context = canvas.getContext('2d');
 let currentSize = 10;
 let bucketColor = '#FFFFFF';
 let currentColor = '#A51DAB';
@@ -63,11 +65,11 @@ let currentColor = '#A51DAB';
 
 // Create Canvas
 function createCanvas() {
-  // canvas.width = ;
-  // canvas.height = ;
-  // context.fillStyle = ;
-  // context.fillRect();
-  body.appendChild(canvas);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight - 50;
+    context.fillStyle = bucketColor;
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    body.appendChild(canvas);
 
 }
 
@@ -112,48 +114,48 @@ function createCanvas() {
 
 // Get Mouse Position
 function getMousePosition(event) {
-  const boundaries = canvas.getBoundingClientRect();
-  return {
-    x: event.clientX - boundaries.left,
-    y: event.clientY - boundaries.top,
-  };
+    const boundaries = canvas.getBoundingClientRect();
+    return {
+        x: event.clientX - boundaries.left,
+        y: event.clientY - boundaries.top,
+    };
 }
 
 // Mouse Down
 canvas.addEventListener('mousedown', (event) => {
-  isMouseDown = true;
-  const currentPosition = getMousePosition(event);
-  console.log('mouse is clicked', currentPosition);
-//   context.moveTo(currentPosition.x, currentPosition.y);
-//   context.beginPath();
-//   context.lineWidth = currentSize;
-//   context.lineCap = 'round';
-//   context.strokeStyle = currentColor;
+    isMouseDown = true;
+    const currentPosition = getMousePosition(event);
+    console.log('mouse is clicked', currentPosition);
+    //   context.moveTo(currentPosition.x, currentPosition.y);
+    //   context.beginPath();
+    //   context.lineWidth = currentSize;
+    //   context.lineCap = 'round';
+    //   context.strokeStyle = currentColor;
 });
 
 // Mouse Move
 canvas.addEventListener('mousemove', (event) => {
-  if (isMouseDown) {
-    const currentPosition = getMousePosition(event);
-    console.log('mouse is moving', currentPosition);
-  //   context.lineTo(currentPosition.x, currentPosition.y);
-  //   context.stroke();
-  //   storeDrawn(
-  //     currentPosition.x,
-  //     currentPosition.y,
-  //     currentSize,
-  //     currentColor,
-  //     isEraser,
-  //   );
-  // } else {
-  //   storeDrawn(undefined);
-  }
+    if (isMouseDown) {
+        const currentPosition = getMousePosition(event);
+        console.log('mouse is moving', currentPosition);
+        //   context.lineTo(currentPosition.x, currentPosition.y);
+        //   context.stroke();
+        //   storeDrawn(
+        //     currentPosition.x,
+        //     currentPosition.y,
+        //     currentSize,
+        //     currentColor,
+        //     isEraser,
+        //   );
+        // } else {
+        //   storeDrawn(undefined);
+    }
 });
 
 // Mouse Up
 canvas.addEventListener('mouseup', () => {
-  isMouseDown = false;
-  console.log('mouse is unclicked');
+    isMouseDown = false;
+    console.log('mouse is unclicked');
 });
 
 // // Save to Local Storage
